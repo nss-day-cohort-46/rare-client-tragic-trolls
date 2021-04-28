@@ -2,8 +2,6 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { TagList } from "../tags/TagList"
 import { TagProvider } from "../tags/TagProvider"
-import { CategoryList } from "./categories/CategoryList"
-import { CategoryProvider } from "./categories/CategoryProvider"
 
 import { CommentProvider } from "./comment/CommentProvider"
 import { PostDetail } from "./post/PostDetail"
@@ -21,11 +19,6 @@ export const ApplicationViews = () => {
                     <TagList/>
                 </TagProvider>
             </Route>
-            <Route exact path="/categories">
-                <CategoryProvider>
-                    <CategoryList/>
-                </CategoryProvider>
-            </Route>
             <Route exact path="/posts">
                 <PostList />
             </Route>
@@ -35,7 +28,6 @@ export const ApplicationViews = () => {
                     <PostDetail />
                 </CommentProvider>
                 </PostProvider>
-
             </Route>
         </main>
     </>
