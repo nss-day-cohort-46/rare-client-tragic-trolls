@@ -36,7 +36,9 @@ export const TagList = () => {
     }
     const handleCloseForm = () => {
         setShowForm(false)
-        setTag({"label":""})
+        setTag({
+            "id":0,
+            "label":""})
     }
     const saveTag = () => {
         if(tag.id === 0){
