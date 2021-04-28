@@ -1,5 +1,8 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { TagList } from "../tags/TagList"
+import { TagProvider } from "../tags/TagProvider"
+
 import { CommentProvider } from "./comment/CommentProvider"
 import { PostDetail } from "./post/PostDetail"
 import { PostList } from "./post/PostList"
@@ -11,6 +14,11 @@ export const ApplicationViews = () => {
             margin: "5rem 2rem",
             lineHeight: "1.75rem"
         }}>
+            <Route exact path="/tags">
+                <TagProvider>
+                    <TagList/>
+                </TagProvider>
+            </Route>
             <Route exact path="/posts">
                 <PostList />
             </Route>
