@@ -1,5 +1,6 @@
 import React, { useRef } from "react"
 import { Link } from "react-router-dom"
+import { HumanDate } from "../utils/HumanDate"
 import "./Auth.css"
 
 export const Register = (props) => {
@@ -10,6 +11,7 @@ export const Register = (props) => {
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
+    const displayName = useRef()
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -20,7 +22,11 @@ export const Register = (props) => {
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "email": email.current.value,
-                "password": password.current.value
+                "password": password.current.value,
+                "display_name": displayName.current.value,
+                "bio": bio.current.value,
+                "img_url": "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
+                "created_on": HumanDate(Date.now())
             }
 
             return fetch("http://127.0.0.1:8088/register", {
@@ -53,6 +59,7 @@ export const Register = (props) => {
 
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
+                date
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
                     <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
@@ -60,6 +67,14 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="lastName"> Last Name </label>
                     <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="displayName"> Display Name </label>
+                    <input ref={displayName} type="text" name="displayName" className="form-control" placeholder="Display name" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="bio"> Bio </label>
+                    <input ref={bio} type="text" name="bio" className="form-control" placeholder="Bio"/>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputEmail"> Email address </label>
