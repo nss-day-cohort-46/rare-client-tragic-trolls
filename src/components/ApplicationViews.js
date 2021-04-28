@@ -5,6 +5,11 @@ import { TagProvider } from "../tags/TagProvider"
 import { CategoryList } from "./categories/CategoryList"
 import { CategoryProvider } from "./categories/CategoryProvider"
 
+import { CommentProvider } from "./comment/CommentProvider"
+import { PostDetail } from "./post/PostDetail"
+import { PostList } from "./post/PostList"
+import { PostProvider } from "./post/PostProvider"
+
 export const ApplicationViews = () => {
     return <>
         <main style={{
@@ -20,6 +25,17 @@ export const ApplicationViews = () => {
                 <CategoryProvider>
                     <CategoryList/>
                 </CategoryProvider>
+            </Route>
+            <Route exact path="/posts">
+                <PostList />
+            </Route>
+            <Route exact path="/posts/detail/:postId(\d+)">
+                <PostProvider>
+                <CommentProvider>
+                    <PostDetail />
+                </CommentProvider>
+                </PostProvider>
+
             </Route>
         </main>
     </>
