@@ -4,6 +4,8 @@ import { TagList } from "../tags/TagList"
 import { TagProvider } from "../tags/TagProvider"
 import { CategoryList } from "./categories/CategoryList"
 import { CategoryProvider } from "./categories/CategoryProvider"
+import { UserList } from "./users/UserList"
+import { UserProvider } from "./users/UserProvider"
 
 export const ApplicationViews = () => {
     return <>
@@ -20,6 +22,11 @@ export const ApplicationViews = () => {
                 <CategoryProvider>
                     <CategoryList/>
                 </CategoryProvider>
+            </Route>
+            <Route exact path="/users">
+                <UserProvider>
+                    <UserList/>
+                </UserProvider>
             </Route>
         </main>
     </>

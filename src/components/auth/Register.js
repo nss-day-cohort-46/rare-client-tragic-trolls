@@ -1,9 +1,10 @@
 import React, { useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { HumanDate } from "../utils/HumanDate"
 import "./Auth.css"
 
 export const Register = (props) => {
+    const history = useHistory()
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
@@ -25,11 +26,11 @@ export const Register = (props) => {
                 "password": password.current.value,
                 "display_name": displayName.current.value,
                 "bio": bio.current.value,
-                "img_url": "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
+                "profile_image_url": "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png",
                 "created_on": HumanDate(Date.now())
             }
 
-            return fetch("http://127.0.0.1:8088/register", {
+            return fetch("http://127.0.0.1:8088/users", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,9 +40,10 @@ export const Register = (props) => {
             })
                 .then(res => res.json())
                 .then(res => {
+                    console.log(res)
                     if ("valid" in res && res.valid) {
                         localStorage.setItem("rare_user_id", res.token)
-                        props.history.push("/")
+                        history.push("/")
                     }
                 })
         } else {
