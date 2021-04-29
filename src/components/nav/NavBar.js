@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, useHistory } from "react-router-dom"
 import "./NavBar.css"
-import Logo from "./rare.jpeg"
+import Logo from "./image.png"
 
 export const NavBar = () => {
     const history = useHistory()
@@ -19,6 +19,15 @@ export const NavBar = () => {
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/posts/my-posts">My Posts</Link>
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/users">Users</Link>
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/tags">Tags</Link>
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/categories">Categories</Link>
             </li>
             {
                 (localStorage.getItem("rare_user_id") !== null) ?
