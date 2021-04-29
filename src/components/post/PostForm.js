@@ -3,7 +3,7 @@ import { CommentContext } from "./CommentProvider"
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
 
 export const PostForm = (props) => {
-    const { createComment } = useContext(CommentContext)
+    const { createPost } = useContext(CommentContext)
 
     const currentUser = parseInt(localStorage.getItem("rare_user_id"))
     const today = new Date()
@@ -19,15 +19,15 @@ export const PostForm = (props) => {
     })
 
     const handleControlledInputChange = (event) => {
-        let newComment = { ...post }
+        let newPost = { ...post }
 
-        newComment[event.target.id] = event.target.value
+        newPost[event.target.id] = event.target.value
 
-        setPost(newComment)
+        setPost(newPost)
     }
 
     const handleSubmitClick = (event) => {
-        createComment(post)
+        createPost(post)
     }
 
     return (
