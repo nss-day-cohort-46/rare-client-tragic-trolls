@@ -1,4 +1,4 @@
-import React, { createContext } from "react"
+import React, { createContext, useState } from "react"
 
 export const ReactionContext = createContext()
 
@@ -9,10 +9,6 @@ export const ReactionProvider = (props) => {
     return fetch("http://localhost:8088/reactions")
     .then(res => res.json())
     .then(setReactions)
-  }
-
-  const addReaction = (postReaction) => {
-    return fetch("http://localhost:8088/reactions")
   }
 
   return (

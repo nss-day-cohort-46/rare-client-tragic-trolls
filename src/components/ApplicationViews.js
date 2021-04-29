@@ -4,6 +4,8 @@ import { CommentProvider } from "./comment/CommentProvider"
 import { PostDetail } from "./post/PostDetail"
 import { PostList } from "./post/PostList"
 import { PostProvider } from "./post/PostProvider"
+import { PostReactionProvider } from "./postReaction/PostReactionProvider"
+import { ReactionProvider } from "./reaction/ReactionProvider"
 
 export const ApplicationViews = () => {
     return <>
@@ -15,11 +17,15 @@ export const ApplicationViews = () => {
                 <PostList />
             </Route>
             <Route exact path="/posts/detail/:postId(\d+)">
+                <PostReactionProvider>
+                <ReactionProvider>
                 <PostProvider>
                 <CommentProvider>
                     <PostDetail />
                 </CommentProvider>
                 </PostProvider>
+                </ReactionProvider>
+                </PostReactionProvider>
             </Route>
         </main>
     </>

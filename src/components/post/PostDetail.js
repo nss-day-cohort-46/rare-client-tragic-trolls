@@ -4,15 +4,21 @@ import { CommentCard } from "../comment/CommentCard"
 import { CommentForm } from "../comment/CommentForm"
 import { PostContext } from "./PostProvider"
 import { CommentContext } from "../comment/CommentProvider"
+import { ReactionContext } from "../reaction/ReactionProvider"
+import { PostReactionContext } from "../postReaction/PostReactionProvider"
+import "./PostDetail.css"
 import {
   Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button, ListGroup
+  CardTitle, CardSubtitle, Button, 
+  ListGroup, Dropdown, DropdownToggle, 
+  DropdownMenu, DropdownItem
 } from 'reactstrap';
-import "./PostDetail.css"
 
 export const PostDetail = () => {
   const {getPostById} = useContext(PostContext)
   const {comments} = useContext(CommentContext)
+  const {getReactions, reactions} = useContext(ReactionContext)
+  const {postReactions, getPostReactionsById, addReaction} = useContext(PostReactionContext)
 
   const [post, setPost] = useState({
     'id': 0,
@@ -28,11 +34,26 @@ export const PostDetail = () => {
     'reactions': []
   })
 
+  const [dropdownOpen, setDropdownOpen] = useState(false)
   const {postId} = useParams()
+  const currentUser = parseInt(localStorage.getItem("rare_user_id"))
+
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
+
+  const handleReactionInput = (event) => {
+    const newReaction = {
+      "user_id": currentUser,
+      "reaction_id": parseInt(event.target.id),
+      "post_id": post.id
+    }
+    addReaction(newReaction)
+    .then(getPostReactionsById(post.id))
+  }
 
   useEffect(() => {
     getPostById(parseInt(postId))
     .then(setPost)
+    .then(getReactions)
   }, [comments])
 
   return (
@@ -44,7 +65,16 @@ export const PostDetail = () => {
           <CardText>{post.content}</CardText>
         </CardBody>
         <div className="reactions">
-          
+        <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+          <DropdownToggle caret>
+            Reactions
+          </DropdownToggle>
+          <DropdownMenu>
+          {reactions.map(reaction => {
+            return <DropdownItem key={reaction.id} id={reaction.id} onClick={event => handleReactionInput(event)}><img src={reaction.image_url} alt={reaction.label} style={{pointerEvents:"none"}} width="20vh" height="20vh" /></DropdownItem>
+          })}
+          </DropdownMenu>
+        </Dropdown>
           {post.reactions.map(reaction => {
             return (
               <div className="reaction" key={reaction.id} style={{display:"inline-block"}}>
