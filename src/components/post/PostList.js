@@ -33,10 +33,10 @@ export const PostList = () => {
           return (<ListGroupItem key={post.id}>
             <ListGroupItemHeading>{post?.title}</ListGroupItemHeading>
             <ListGroupItemText>
-              {post?.author}
+              {post?.user.displayName}
             </ListGroupItemText>
             <ListGroupItemText>
-              {post?.category}
+              {post?.category.label}
             </ListGroupItemText>
             <Link to={`/posts/detail/1`}>
               Post Details
