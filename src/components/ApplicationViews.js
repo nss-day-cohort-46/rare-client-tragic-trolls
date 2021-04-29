@@ -6,6 +6,8 @@ import { CommentProvider } from "./comment/CommentProvider"
 import { PostDetail } from "./post/PostDetail"
 import { PostList } from "./post/PostList"
 import { PostProvider } from "./post/PostProvider"
+import { UserList } from "./users/UserList"
+import { UserProvider } from "./users/UserProvider"
 import { TagList } from "./tags/TagList"
 import { TagProvider } from "./tags/TagProvider"
 
@@ -34,6 +36,11 @@ export const ApplicationViews = () => {
                     <PostDetail />
                 </CommentProvider>
                 </PostProvider>
+            </Route>
+            <Route exact path="/users">
+                <UserProvider>
+                    <UserList/>
+                </UserProvider>
             </Route>
         </main>
     </>
