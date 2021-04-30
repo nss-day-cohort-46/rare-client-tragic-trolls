@@ -22,8 +22,8 @@ export const PostList = () => {
         .then(result => {
           const sortedArrayOfPosts = sortThePosts(result)
           const approvedPosts = filterApprovedPosts(sortedArrayOfPosts)
-          const nonFuturePosts = filterPastPosts(approvedPosts)
-          setPosts(approvedPosts)
+          const postsNotFromTheFuture = nonFuturePosts(approvedPosts)
+          setPosts(postsNotFromTheFuture)
         })
     }
   }, [])
@@ -69,7 +69,7 @@ const nonFuturePosts = (posts) => {
   const today = new Date()
   return posts.filter(post => {
     const dateArray = post.publicationDate.split("-")
+    dateOfPublication = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
+    return today > dateOfPublication
   })
-  // 21st March 1988, 12am, Local Time.
-  new Date(1988, 2, 21)
 }
