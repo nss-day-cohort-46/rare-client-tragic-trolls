@@ -25,7 +25,7 @@ export const UserProvider = (props) => {
                 "Content-Type":"application/json"
             },
             body: JSON.stringify({
-                "follower_id" : followerId,
+                "follower_id" : parseInt(followerId),
                 "author_id" : authorId
             })
         })

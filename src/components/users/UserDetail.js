@@ -7,7 +7,7 @@ import { UserContext } from "./UserProvider";
 export const UserDetail = () => {
     const {getUserById, subscribe, checkSubscribed, unsubscribe} = useContext(UserContext)
     const [user, setUser] = useState({})
-    const {userId} = useParams();
+    const {userId} = useParams()
     const [subscribed, setSubscribed] = useState(false)
     useEffect(()=>{
         getUserById(userId).then(setUser)
@@ -18,16 +18,17 @@ export const UserDetail = () => {
         }
     },[user])
     const handleSubscribeClicked = () => {
+        debugger
         if(subscribed){
             let subscription = {
-                "follower_id" : localStorage.getItem("rare_user_id"),
+                "follower_id" : parseInt(localStorage.getItem("rare_user_id")),
                 "author_id" : user.id,
                 "ended_on" : HumanDate()
             }
             unsubscribe(subscription).then(setSubscribed(false))
         }else{
             let subscription = {
-                "follower_id" : localStorage.getItem("rare_user_id"),
+                "follower_id" : parseInt(localStorage.getItem("rare_user_id")),
                 "author_id" : user.id,
                 "created_on" : HumanDate(),
                 "ended_on" : ""
