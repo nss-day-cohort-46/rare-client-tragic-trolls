@@ -3,31 +3,44 @@ import { CommentContext } from "./CommentProvider"
 import {Button} from "reactstrap"
 
 export const CommentForm = (props) => {
-  const {createComment} = useContext(CommentContext)
+  const {createComment, newComment, setNewComment, editComment} = useContext(CommentContext)
 
   const currentUser = parseInt(localStorage.getItem("rare_user_id"))
   const today = new Date()
   const currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
 
-  const [comment, setComment] = useState({
-    "subject": "",
-    "content": "",
-    "post_id": props.postId,
-    "author_id": currentUser,
-    "created_on": currentDate
-  })
-
   const handleControlledInputChange = (event) => {
-    let newComment = {...comment}
+    let comment = {...newComment}
 
-    newComment[event.target.id] = event.target.value
+    comment[event.target.id] = event.target.value
 
-    setComment(newComment)
+    setNewComment(comment)
   }
 
   const handleSubmitClick = (event) => {
-      createComment(comment)
+    if(newComment.id){
+      editComment(newComment)
+    } else{
+      createComment(newComment)
+    }
+    setNewComment({
+      "subject": "",
+      "content": "",
+      "post_id": props.postId,
+      "author_id": currentUser,
+      "created_on": currentDate
+    })
   }
+
+  useEffect(() => {
+    setNewComment({
+      "subject": "",
+      "content": "",
+      "post_id": props.postId,
+      "author_id": currentUser,
+      "created_on": currentDate  
+    })
+  }, [])
 
   return (
     <form className="commentForm" autoComplete="off">
@@ -35,11 +48,11 @@ export const CommentForm = (props) => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="subject">Subject: </label>
-          <input type="text" id="subject" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Subject" value={comment.subject} />
+          <input type="text" id="subject" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Subject" value={newComment.subject} />
         </div>
         <div className="form-group">
           <label htmlFor="content">Comment: </label>
-          <input type="text" id="content" onChange={handleControlledInputChange} required className="form-control" placeholder="Comment" value={comment.content} />
+          <input type="text" id="content" onChange={handleControlledInputChange} required className="form-control" placeholder="Comment" value={newComment.content} />
         </div>
       </fieldset>
       <Button className="btn__submit" onClick={event => {
