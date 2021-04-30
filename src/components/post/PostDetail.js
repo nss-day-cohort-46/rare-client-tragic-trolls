@@ -18,7 +18,7 @@ export const PostDetail = () => {
   const {getPostById} = useContext(PostContext)
   const {comments} = useContext(CommentContext)
   const {getReactions, reactions} = useContext(ReactionContext)
-  const {postReactions, getPostReactionsById, addReaction} = useContext(PostReactionContext)
+  const {postReactions, setPostReactions, getPostReactionsById, addReaction} = useContext(PostReactionContext)
 
   const [post, setPost] = useState({
     'id': 0,
@@ -49,6 +49,10 @@ export const PostDetail = () => {
         "reaction_id": parseInt(event.target.id),
         "post_id": post.id
       }
+      let newPostReactions = [...postReactions]
+      newPostReactions.push(newReaction)
+
+      setPostReactions(newPostReactions)
       addReaction(newReaction)
   
       let newPost = {...post}

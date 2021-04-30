@@ -6,7 +6,6 @@ export const PostReactionProvider = (props) => {
   const [postReactions, setPostReactions] = useState([])
 
   const getPostReactionsById = (postId) => {
-    console.log("gettign post by id, ", postId)
     return fetch(`http://localhost:8088/postreactions/${postId}`)
     .then(res => res.json())
     .then(setPostReactions)
@@ -20,12 +19,11 @@ export const PostReactionProvider = (props) => {
       },
       body: JSON.stringify(postReaction)
     })
-    .then(getPostReactionsById(postReaction.post_id))
   }
 
   return (
     <PostReactionContext.Provider value={{
-      postReactions, getPostReactionsById, addReaction
+      postReactions, getPostReactionsById, addReaction, setPostReactions
     }}>
       {props.children}
     </PostReactionContext.Provider>
