@@ -38,7 +38,7 @@ export const PostList = () => {
             <ListGroupItemText>
               Category: {post?.category.label}
             </ListGroupItemText>
-            <Link to={`/posts/detail/1`}>
+            <Link to={`/posts/detail/${post.id}`}>
               Post Details
             </Link>
           </ListGroupItem>)

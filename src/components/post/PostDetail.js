@@ -80,8 +80,8 @@ export const PostDetail = () => {
     <>
       <Card>
         <CardBody>
-          <CardTitle>{post.title}</CardTitle>
-          <CardSubtitle>{post.userId} | {post.publicationDate}</CardSubtitle>
+          <CardTitle className="text-center">{post.title}</CardTitle>
+          <CardSubtitle className="text-center">{post.userId} | {post.publicationDate}</CardSubtitle>
           <CardText>{post.content}</CardText>
         </CardBody>
         <div className="reactions">
