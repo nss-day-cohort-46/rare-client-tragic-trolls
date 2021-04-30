@@ -9,6 +9,7 @@ import { PostList } from "./post/PostList"
 import { PostProvider } from "./post/PostProvider"
 import { PostReactionProvider } from "./postReaction/PostReactionProvider"
 import { ReactionProvider } from "./reaction/ReactionProvider"
+import { ReactionList } from "./reaction/ReactionList"
 import { UserList } from "./users/UserList"
 import { UserProvider } from "./users/UserProvider"
 import { TagList } from "./tags/TagList"
@@ -30,6 +31,11 @@ export const ApplicationViews = () => {
                 <CategoryProvider>
                     <CategoryList />
                 </CategoryProvider>
+            </Route>
+            <Route exact path="/reactions">
+                <ReactionProvider>
+                    <ReactionList />
+                </ReactionProvider>
             </Route>
             <Route exact path="/posts">
                 <PostProvider>

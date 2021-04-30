@@ -91,7 +91,7 @@ export const PostDetail = () => {
           </DropdownToggle>
           <DropdownMenu>
           {reactions.map(reaction => {
-            return <DropdownItem key={reaction.id} id={reaction.id} onClick={event => handleReactionInput(event)}><img src={reaction.image_url} alt={reaction.label} style={{pointerEvents:"none"}} width="20vh" height="20vh" /></DropdownItem>
+            return <DropdownItem key={reaction.id} id={reaction.id} onClick={event => handleReactionInput(event)}><img src={reaction.image_url} alt={reaction.label} style={{pointerEvents:"none"}} width="20vh" height="20vh" />{reaction.label}</DropdownItem>
           })}
           </DropdownMenu>
         </Dropdown>

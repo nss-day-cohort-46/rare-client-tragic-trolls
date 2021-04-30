@@ -5,11 +5,12 @@ import Logo from "./image.png"
 import { UserContext } from "../users/UserProvider"
 
 export const NavBar = () => {
+    const {admin, checkAdmin} = useContext(UserContext)
     const history = useHistory()
-    const { checkAdmin, admin } = useContext(UserContext)
     useEffect(() => {
         checkAdmin()
     }, [])
+
     return (
         <ul className="navbar">
             <li className="navbar__item">
@@ -38,6 +39,14 @@ export const NavBar = () => {
             <li className="navbar__item">
                 <Link className="navbar__link" to="/categories">Categories</Link>
             </li>
+            {
+                admin ? 
+                    <li className="navbar__item">
+                        <Link className="navbar__link" to="/reactions">Reactions</Link>
+                    </li> :
+                    <></>
+
+            }
             {
                 (localStorage.getItem("rare_user_id") !== null) ?
                     <li className="nav-item">
