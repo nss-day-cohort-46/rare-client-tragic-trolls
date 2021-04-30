@@ -5,10 +5,13 @@ import { HumanDate } from "../utils/HumanDate";
 import { UserContext } from "./UserProvider";
 
 export const UserDetail = () => {
-    const {getUserById, subscribe, checkSubscribed, unsubscribe} = useContext(UserContext)
+    const {getUserById, subscribe, checkSubscribed, unsubscribe,checkAdmin, admin, changeAuthorStatus} = useContext(UserContext)
     const [user, setUser] = useState({})
     const {userId} = useParams()
     const [subscribed, setSubscribed] = useState(false)
+    useEffect(()=>{
+        checkAdmin()
+    },[])
     useEffect(()=>{
         getUserById(userId).then(setUser)
     },[subscribed])
@@ -17,6 +20,9 @@ export const UserDetail = () => {
             checkSubscribed(parseInt(localStorage.getItem("rare_user_id")),user.id).then(res=> setSubscribed(res.subscribed))
         }
     },[user])
+    const handlePromotionClicked = () => {
+        changeAuthorStatus(user.id).then(res=>getUserById(user.id)).then(setUser)
+    }
     const handleSubscribeClicked = () => {
         if(subscribed){
             let subscription = {
@@ -52,7 +58,7 @@ export const UserDetail = () => {
                 subscribed: {String(subscribed)}
             </CardText>
           <Button onClick={handleSubscribeClicked}>{subscribed ? "Unsubcribe" : "Subscribe"}</Button>
-          <Button>Promote</Button>
+          {admin ? <Button onClick={handlePromotionClicked}>{user.active ? "Deactivate": "Activate"}</Button> :<></>}
         </CardBody>
       </Card>
         </>

@@ -4,7 +4,7 @@ import { Card, Button, CardBody, CardTitle, CardText } from "reactstrap"
 import { UserContext } from "./UserProvider"
 
 export const UserList = () => {
-    const {users, getAllUsers} = useContext(UserContext)
+    const {users, getAllUsers, checkAdmin} = useContext(UserContext)
     const history = useHistory()
     useEffect(()=>{
         getAllUsers()
