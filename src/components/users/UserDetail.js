@@ -14,11 +14,10 @@ export const UserDetail = () => {
     },[subscribed])
     useEffect(()=>{
         if(userId && user.id){
-            checkSubscribed(userId,user.id).then(res=> setSubscribed(res.subscribed))
+            checkSubscribed(parseInt(localStorage.getItem("rare_user_id")),user.id).then(res=> setSubscribed(res.subscribed))
         }
     },[user])
     const handleSubscribeClicked = () => {
-        debugger
         if(subscribed){
             let subscription = {
                 "follower_id" : parseInt(localStorage.getItem("rare_user_id")),
