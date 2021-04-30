@@ -19,6 +19,11 @@ export const PostProvider = (props) => {
     .then(res => res.json())
   }
 
+  const getSubscribedUserPosts = (userId) => {
+    return fetch(`http://localhost:8088/subscriptions/${userId}`)
+    .then(res => res.json())
+  }
+
   const createPost = (postBody) => {
     return fetch("http://localhost:8088/posts", {
       method: "POST",
@@ -42,7 +47,7 @@ export const PostProvider = (props) => {
 
   return (
     <PostContext.Provider value={{
-      getPostById, createPost, getAllPosts, getPostsByUserId, approvePost
+      getPostById, createPost, getAllPosts, getPostsByUserId, approvePost, getSubscribedUserPosts
     }}>
       {props.children}
     </PostContext.Provider>
