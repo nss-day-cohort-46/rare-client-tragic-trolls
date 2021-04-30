@@ -47,6 +47,11 @@ export const ApplicationViews = () => {
                     <PostList />
                 </PostProvider>
             </Route>
+            <Route exact path="/posts/unapproved-posts">
+                <PostProvider>
+                    <PostList />
+                </PostProvider>
+            </Route>
             <Route exact path="/posts/create">
                 <PostProvider>
                     <CategoryProvider>

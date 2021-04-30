@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { CommentContext } from "./CommentProvider"
 import {Button} from "reactstrap"
+import "./CommentForm.css"
 
 export const CommentForm = (props) => {
   const {createComment, newComment, setNewComment, editComment} = useContext(CommentContext)

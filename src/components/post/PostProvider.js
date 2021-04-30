@@ -27,12 +27,22 @@ export const PostProvider = (props) => {
       },
       body: JSON.stringify(postBody)
     })
-    .then(getAllPosts)
+    .then(res => res.json())
+  }
+
+  const approvePost = (postId) => {
+    return fetch(`http://localhost:8088/approve/${postId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({})
+    })
   }
 
   return (
     <PostContext.Provider value={{
-      getPostById, createPost, getAllPosts, getPostsByUserId
+      getPostById, createPost, getAllPosts, getPostsByUserId, approvePost
     }}>
       {props.children}
     </PostContext.Provider>

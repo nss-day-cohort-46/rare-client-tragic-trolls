@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
+import { useHistory } from "react-router"
 import { Button, Form, FormGroup, Label, Input, ListGroup, ListGroupItem } from 'reactstrap'
 import { CategoryContext } from "../categories/CategoryProvider"
 import { TagContext } from "../tags/TagProvider"
@@ -8,6 +9,7 @@ export const PostForm = (props) => {
     const { createPost } = useContext(PostContext)
     const { getAllCategories, categories } = useContext(CategoryContext)
     const { getAllTags, tags } = useContext(TagContext)
+    const history = useHistory()
     const currentUser = parseInt(localStorage.getItem("rare_user_id"))
     const today = new Date()
     const currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
@@ -47,11 +49,11 @@ export const PostForm = (props) => {
             newPost[event.target.id] = event.target.value
             setPost(newPost)
         }
-        console.log(newPost)
     }
 
     const handleSubmitClick = (event) => {
         createPost(post)
+            .then(result => history.push(`/posts/detail/${result.id}`))
     }
 
     return (

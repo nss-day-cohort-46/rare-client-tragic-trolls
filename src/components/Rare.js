@@ -12,7 +12,7 @@ export const Rare = () => (
             if (localStorage.getItem("rare_user_id")) {
                 return <>
                     <UserProvider>
-                    <NavBar />
+                        <NavBar />
                     </UserProvider>
                     <ApplicationViews />
                 </>
