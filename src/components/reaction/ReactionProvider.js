@@ -11,9 +11,20 @@ export const ReactionProvider = (props) => {
     .then(setReactions)
   }
 
+  const createReaction = (reaction) => {
+    return fetch("http://localhost:8088/reactions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(reaction)
+    })
+    .then(getReactions)
+  }
+
   return (
     <ReactionContext.Provider value={{
-      reactions, getReactions
+      reactions, getReactions, createReaction
     }}>
       {props.children}
     </ReactionContext.Provider>
