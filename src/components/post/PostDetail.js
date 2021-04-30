@@ -8,7 +8,7 @@ import { ReactionContext } from "../reaction/ReactionProvider"
 import { PostReactionContext } from "../postReaction/PostReactionProvider"
 import "./PostDetail.css"
 import {
-  Card, CardImg, CardText, CardBody,
+  Card, CardText, CardBody,
   CardTitle, CardSubtitle, Button, 
   ListGroup, Dropdown, DropdownToggle, 
   DropdownMenu, DropdownItem
@@ -41,19 +41,35 @@ export const PostDetail = () => {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
 
   const handleReactionInput = (event) => {
-    const newReaction = {
-      "user_id": currentUser,
-      "reaction_id": parseInt(event.target.id),
-      "post_id": post.id
+    if(postReactions.find(pr => pr.user_id === currentUser && pr.reaction_id === parseInt(event.target.id))){
+      return
+    }else {
+      const newReaction = {
+        "user_id": currentUser,
+        "reaction_id": parseInt(event.target.id),
+        "post_id": post.id
+      }
+      addReaction(newReaction)
+  
+      let newPost = {...post}
+      let reactionIndex = newPost.reactions.findIndex(reaction => reaction.id === parseInt(event.target.id))
+      if (newPost.reactions[reactionIndex]){
+        newPost.reactions[reactionIndex].count = newPost.reactions[reactionIndex].count + 1
+        setPost(newPost)
+      } else{
+        const foundReaction = reactions.find(reaction => reaction.id === parseInt(event.target.id))
+        foundReaction.count = 1
+        newPost.reactions.push(foundReaction)
+        setPost(newPost)
+      }
     }
-    addReaction(newReaction)
-    .then(getPostReactionsById(post.id))
   }
 
   useEffect(() => {
     getPostById(parseInt(postId))
     .then(setPost)
     .then(getReactions)
+    .then(getPostReactionsById(parseInt(postId)))
   }, [comments])
 
   return (

@@ -5,11 +5,11 @@ export const PostReactionContext = createContext()
 export const PostReactionProvider = (props) => {
   const [postReactions, setPostReactions] = useState([])
 
-  const getPostReactionsById = (post_id) => {
-    return fetch(`http://localhost:8088/postreactions/${post_id}`)
+  const getPostReactionsById = (postId) => {
+    console.log("gettign post by id, ", postId)
+    return fetch(`http://localhost:8088/postreactions/${postId}`)
     .then(res => res.json())
-    .then(res => setPostReactions(res))
-    .then(console.log(postReactions))
+    .then(setPostReactions)
   }
 
   const addReaction = (postReaction) => {
