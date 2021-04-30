@@ -12,7 +12,7 @@ export const UserList = () => {
     return(
         <>
         {users?.map(user => {
-            if(user.id !== localStorage.getItem("rare_user_id")){
+            if(user.id !== parseInt(localStorage.getItem("rare_user_id"))){
                 return(
                     <Card style={{ width: '18rem' }}>
                         <CardBody>
