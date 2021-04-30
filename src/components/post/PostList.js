@@ -20,7 +20,6 @@ export const PostList = () => {
     else if (urlPath === "/posts") {
       getAllPosts()
         .then(result => {
-          debugger
           const sortedArrayOfPosts = sortThePosts(result)
           const approvedPosts = filterApprovedPosts(sortedArrayOfPosts)
           const postsNotFromTheFuture = nonFuturePosts(approvedPosts)
