@@ -30,9 +30,13 @@ export const PostProvider = (props) => {
     .then(getAllPosts)
   }
 
+  const approvePost = (postId) => {
+    return fetch(`http://localhost:8088/approve/${postId}`)
+  }
+
   return (
     <PostContext.Provider value={{
-      getPostById, createPost, getAllPosts, getPostsByUserId
+      getPostById, createPost, getAllPosts, getPostsByUserId, approvePost
     }}>
       {props.children}
     </PostContext.Provider>
