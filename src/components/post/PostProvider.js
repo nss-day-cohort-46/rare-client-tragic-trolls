@@ -31,7 +31,13 @@ export const PostProvider = (props) => {
   }
 
   const approvePost = (postId) => {
-    return fetch(`http://localhost:8088/approve/${postId}`)
+    return fetch(`http://localhost:8088/approve/${postId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({})
+    })
   }
 
   return (

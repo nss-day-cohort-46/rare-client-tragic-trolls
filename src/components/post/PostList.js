@@ -5,6 +5,7 @@ import { PostContext } from "./PostProvider";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([])
+  const [gotApproval, setGotApproval] = useState(false)
   const { getPostsByUserId, getAllPosts, approvePost } = useContext(PostContext)
   const currentUser = parseInt(localStorage.getItem("rare_user_id"))
   const history = useHistory()
@@ -35,11 +36,14 @@ export const PostList = () => {
           setPosts(unApprovedPosts)
         })
     }
-  }, [])
+  }, [gotApproval === true])
 
   const handleApprovePost = (postId) => {
     approvePost(postId)
-      .then()
+      .then(() => {
+        setGotApproval(true)
+        setGotApproval(false)
+      })
   }
 
   return (
