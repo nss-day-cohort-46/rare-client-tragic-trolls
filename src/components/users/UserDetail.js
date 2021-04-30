@@ -21,7 +21,13 @@ export const UserDetail = () => {
         }
     },[user])
     const handlePromotionClicked = () => {
-        changeAuthorStatus(user.id).then(res=>getUserById(user.id)).then(setUser)
+        let action
+        if(user.active){
+            action = "deactivate"
+        }else{
+            action = "activate"
+        }
+        changeAuthorStatus(user.id, action).then(res=>getUserById(user.id)).then(setUser)
     }
     const handleSubscribeClicked = () => {
         if(subscribed){

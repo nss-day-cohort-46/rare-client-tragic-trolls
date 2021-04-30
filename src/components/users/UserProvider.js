@@ -55,13 +55,15 @@ export const UserProvider = (props) => {
         .then(res => res.json())
         .then(res => setAdmin(res.isAdmin))
     }
-    const changeAuthorStatus = (userId) => {
-        return fetch(`http://localhost:8088/active_status/${userId}`,{
+    const changeAuthorStatus = (userId, action) => {
+        return fetch(`http://localhost:8088/active_status`,{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify({"action":"activating user"})
+            body: JSON.stringify({"action": action,
+                                    "user_id": userId,
+                                    "approver_one_id": parseInt(localStorage.getItem("rare_user_id"))})
         })
     }
     return (
