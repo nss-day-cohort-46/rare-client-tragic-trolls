@@ -1,0 +1,9 @@
+.reaction {
+  margin: 1vh;
+  padding: 0.5vh;
+  border: 1px solid black;
+}
+
+.reaction__img {
+  margin: 0.5vh;
+}
