@@ -27,7 +27,7 @@ export const PostProvider = (props) => {
       },
       body: JSON.stringify(postBody)
     })
-    .then(getAllPosts)
+    .then(res => res.json())
   }
 
   const approvePost = (postId) => {
