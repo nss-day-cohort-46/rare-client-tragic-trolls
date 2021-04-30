@@ -81,7 +81,10 @@ export const PostDetail = () => {
       <Card>
         <CardBody>
           <CardTitle className="text-center">{post.title}</CardTitle>
-          <CardSubtitle className="text-center">{post.userId} | {post.publicationDate}</CardSubtitle>
+          <CardSubtitle className="text-center">{post.user?.fullName} | {post.publicationDate}</CardSubtitle>
+          <CardSubtitle className="text-center">Tags: {post.tags?.map(tag => {
+            return tag.label
+          }).join(", ")}</CardSubtitle>
           <CardText>{post.content}</CardText>
         </CardBody>
         <div className="reactions">
