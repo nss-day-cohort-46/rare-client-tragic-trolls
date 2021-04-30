@@ -29,7 +29,9 @@ export const ApplicationViews = () => {
                 </CategoryProvider>
             </Route>
             <Route exact path="/posts">
-                <PostList />
+                <PostProvider>
+                    <PostList />
+                </PostProvider>
             </Route>
             <Route exact path="/posts/my-posts">
                 <PostProvider>

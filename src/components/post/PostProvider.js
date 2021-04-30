@@ -3,12 +3,10 @@ import React, { createContext, useState } from "react"
 export const PostContext = createContext()
 
 export const PostProvider = (props) => {
-  const [posts, setPosts] = useState()
 
-  const getAllPosts = (id) => {
+  const getAllPosts = () => {
     return fetch(`http://localhost:8088/posts`)
     .then(res => res.json())
-    .then(setPosts)
   }
 
   const getPostById = (id) => {
@@ -34,7 +32,7 @@ export const PostProvider = (props) => {
 
   return (
     <PostContext.Provider value={{
-      posts, getPostById, createPost, getAllPosts, getPostsByUserId
+      getPostById, createPost, getAllPosts, getPostsByUserId
     }}>
       {props.children}
     </PostContext.Provider>

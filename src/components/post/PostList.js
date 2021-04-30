@@ -18,8 +18,9 @@ export const PostList = () => {
         })
     }
     else if (urlPath === "/posts") {
-      getAllPosts(currentUser)
+      getAllPosts()
         .then(result => {
+          debugger
           const sortedArrayOfPosts = sortThePosts(result)
           const approvedPosts = filterApprovedPosts(sortedArrayOfPosts)
           const postsNotFromTheFuture = nonFuturePosts(approvedPosts)
@@ -30,7 +31,7 @@ export const PostList = () => {
   return (
     <section>
       <ListGroup>
-        {posts.map(post => {
+        {posts?.map(post => {
           return (<ListGroupItem key={post.id}>
             <ListGroupItemHeading>{post?.title}</ListGroupItemHeading>
             <ListGroupItemText>
@@ -50,7 +51,7 @@ export const PostList = () => {
 }
 
 const sortThePosts = (posts) => {
-  return posts.sort((a, b) => {
+  return posts?.sort((a, b) => {
     const aDate = new Date(a.date)
     const bDate = new Date(b.date)
     a.date = aDate
@@ -60,16 +61,16 @@ const sortThePosts = (posts) => {
 }
 
 const filterApprovedPosts = (posts) => {
-  return posts.filter(post => {
+  return posts?.filter(post => {
     return post.approved === true
   })
 }
 
 const nonFuturePosts = (posts) => {
   const today = new Date()
-  return posts.filter(post => {
+  return posts?.filter(post => {
     const dateArray = post.publicationDate.split("-")
-    dateOfPublication = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
+    const dateOfPublication = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
     return today > dateOfPublication
   })
 }
