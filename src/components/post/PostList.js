@@ -26,6 +26,14 @@ export const PostList = () => {
           setPosts(postsNotFromTheFuture)
         })
     }
+    else if (urlPath === "/posts/unapproved-posts") {
+      getAllPosts()
+        .then(result => {
+          const sortedArrayOfPosts = sortThePosts(result)
+          const unApprovedPosts = filterUnapprovedPosts(sortedArrayOfPosts)
+          setPosts(unApprovedPosts)
+        })
+    }
   }, [])
   return (
     <section>
@@ -62,6 +70,12 @@ const sortThePosts = (posts) => {
 const filterApprovedPosts = (posts) => {
   return posts?.filter(post => {
     return post.approved === true
+  })
+}
+
+const filterUnapprovedPosts = (posts) => {
+  return posts?.filter(post => {
+    return post.approved === false
   })
 }
 
