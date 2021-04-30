@@ -11,6 +11,7 @@ import { UserList } from "./users/UserList"
 import { UserProvider } from "./users/UserProvider"
 import { TagList } from "./tags/TagList"
 import { TagProvider } from "./tags/TagProvider"
+import { UserDetail } from "./users/UserDetail"
 
 export const ApplicationViews = () => {
     return <>
@@ -59,11 +60,15 @@ export const ApplicationViews = () => {
                     </CommentProvider>
                 </PostProvider>
             </Route>
-            <Route exact path="/users">
-                <UserProvider>
-                    <UserList />
-                </UserProvider>
-            </Route>
+            <UserProvider>
+                <Route exact path="/users">
+                    <UserList/>
+                </Route>
+                <Route exact path="/users/detail/:userId(\d+)">
+                    <UserDetail/>
+                </Route>
+            </UserProvider>
+
         </main>
     </>
 }
