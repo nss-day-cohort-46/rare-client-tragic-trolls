@@ -6,7 +6,7 @@ import { PostContext } from "./PostProvider";
 export const PostList = () => {
   const [posts, setPosts] = useState([])
   const [gotApproval, setGotApproval] = useState(false)
-  const { getPostsByUserId, getAllPosts, approvePost } = useContext(PostContext)
+  const { getPostsByUserId, getAllPosts, approvePost, getSubscribedUserPosts } = useContext(PostContext)
   const currentUser = parseInt(localStorage.getItem("rare_user_id"))
   const history = useHistory()
   const urlPath = history.location.pathname
@@ -34,6 +34,15 @@ export const PostList = () => {
           const sortedArrayOfPosts = sortThePosts(result)
           const unApprovedPosts = filterUnapprovedPosts(sortedArrayOfPosts)
           setPosts(unApprovedPosts)
+        })
+    }
+    else if (urlPath === "/") {
+      getSubscribedUserPosts(currentUser)
+        .then(result => {
+          const sortedArrayOfPosts = sortThePosts(result)
+          const approvedPosts = filterApprovedPosts(sortedArrayOfPosts)
+          const postsNotFromTheFuture = nonFuturePosts(approvedPosts)
+          setPosts(postsNotFromTheFuture)
         })
     }
   }, [gotApproval === true])
