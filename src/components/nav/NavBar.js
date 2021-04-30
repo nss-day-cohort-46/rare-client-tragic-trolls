@@ -1,10 +1,15 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import "./NavBar.css"
 import Logo from "./image.png"
+import { UserContext } from "../users/UserProvider"
 
 export const NavBar = () => {
+    const {admin, checkAdmin} = useContext(UserContext)
     const history = useHistory()
+    useEffect(() => {
+        checkAdmin()
+    }, [])
 
     return (
         <ul className="navbar">
@@ -29,9 +34,14 @@ export const NavBar = () => {
             <li className="navbar__item">
                 <Link className="navbar__link" to="/categories">Categories</Link>
             </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/reactions">Reactions</Link>
-            </li>
+            {
+                admin ? 
+                    <li className="navbar__item">
+                        <Link className="navbar__link" to="/reactions">Reactions</Link>
+                    </li> :
+                    <></>
+
+            }
             {
                 (localStorage.getItem("rare_user_id") !== null) ?
                     <li className="nav-item">

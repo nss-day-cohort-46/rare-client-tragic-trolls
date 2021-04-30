@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ReactionContext } from "./ReactionProvider"
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter } from "reactstrap"
+import { UserContext } from "../users/UserProvider"
 
 export const ReactionList = () => {
   const {reactions, getReactions, createReaction} = useContext(ReactionContext)
