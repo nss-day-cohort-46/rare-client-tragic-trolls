@@ -4,6 +4,7 @@ import { CategoryList } from "./categories/CategoryList"
 import { CategoryProvider } from "./categories/CategoryProvider"
 import { CommentProvider } from "./comment/CommentProvider"
 import { PostDetail } from "./post/PostDetail"
+import { PostForm } from "./post/PostForm"
 import { PostList } from "./post/PostList"
 import { PostProvider } from "./post/PostProvider"
 import { PostReactionProvider } from "./postReaction/PostReactionProvider"
@@ -21,31 +22,45 @@ export const ApplicationViews = () => {
         }}>
             <Route exact path="/tags">
                 <TagProvider>
-                    <TagList/>
+                    <TagList />
                 </TagProvider>
             </Route>
             <Route exact path="/categories">
                 <CategoryProvider>
-                    <CategoryList/>
+                    <CategoryList />
                 </CategoryProvider>
             </Route>
             <Route exact path="/posts">
                 <PostList />
             </Route>
+            <Route exact path="/posts/my-posts">
+                <PostProvider>
+                    <PostList />
+                </PostProvider>
+            </Route>
+            <Route exact path="/posts/create">
+                <PostProvider>
+                    <CategoryProvider>
+                        <TagProvider>
+                            <PostForm />
+                        </TagProvider>
+                    </CategoryProvider>
+                </PostProvider>
+            </Route>
             <Route exact path="/posts/detail/:postId(\d+)">
                 <PostReactionProvider>
                 <ReactionProvider>
                 <PostProvider>
-                <CommentProvider>
-                    <PostDetail />
-                </CommentProvider>
+                    <CommentProvider>
+                        <PostDetail />
+                    </CommentProvider>
                 </PostProvider>
                 </ReactionProvider>
                 </PostReactionProvider>
             </Route>
             <Route exact path="/users">
                 <UserProvider>
-                    <UserList/>
+                    <UserList />
                 </UserProvider>
             </Route>
         </main>
