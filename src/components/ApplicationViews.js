@@ -60,6 +60,15 @@ export const ApplicationViews = () => {
                     </CategoryProvider>
                 </PostProvider>
             </Route>
+            <Route exact path="/posts/edit/:postId(\d+)">
+                <PostProvider>
+                    <CategoryProvider>
+                        <TagProvider>
+                            <PostForm />
+                        </TagProvider>
+                    </CategoryProvider>
+                </PostProvider>
+            </Route>
             <Route exact path="/posts/detail/:postId(\d+)">
                 <PostReactionProvider>
                 <ReactionProvider>

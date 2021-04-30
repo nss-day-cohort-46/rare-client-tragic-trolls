@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { useHistory } from "react-router"
+import { useHistory, useParams } from "react-router"
 import { Button, Form, FormGroup, Label, Input, ListGroup, ListGroupItem } from 'reactstrap'
 import { CategoryContext } from "../categories/CategoryProvider"
 import { TagContext } from "../tags/TagProvider"
@@ -10,6 +10,7 @@ export const PostForm = (props) => {
     const { getAllCategories, categories } = useContext(CategoryContext)
     const { getAllTags, tags } = useContext(TagContext)
     const history = useHistory()
+    const { PostId } = useParams()
     const currentUser = parseInt(localStorage.getItem("rare_user_id"))
     const today = new Date()
     const currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
@@ -27,6 +28,9 @@ export const PostForm = (props) => {
     useEffect(() => {
         getAllCategories()
             .then(getAllTags)
+        if ( PostId ) {
+            
+        }
     }, [])
 
     const handleControlledInputChange = (event) => {

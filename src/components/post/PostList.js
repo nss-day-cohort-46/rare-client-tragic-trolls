@@ -59,6 +59,7 @@ export const PostList = () => {
     <section>
       <ListGroup>
         {posts?.map(post => {
+          const myPost = checkForMyPost(post.id)
           return (<ListGroupItem key={post.id}>
             <ListGroupItemHeading>{post?.title}</ListGroupItemHeading>
             <ListGroupItemText>
@@ -69,6 +70,9 @@ export const PostList = () => {
             </ListGroupItemText>
             <Link to={`/posts/detail/${post.id}`}>
               Post Details
+            </Link>
+            <Link to={`/posts/detail/${post.id}`}>
+            {myPost && <Button onClick={() => history.push(`/post/edit/${post.id}`)}>Edit</Button>}
             </Link>
             <ListGroupItemText>
               {urlPath === "/posts/unapproved-posts" && <Button onClick={() => handleApprovePost(post.id)}>Approve</Button>}
@@ -111,3 +115,9 @@ const nonFuturePosts = (posts) => {
   })
 }
 
+const checkForMyPost = (postId) => {
+  if (postId === currentUser) {
+    return true
+  }
+  return false
+}
